@@ -1,0 +1,16 @@
+.countries{
+    display: flex;
+    max-width: 990px;
+    width: calc(100% - 40px);
+    padding: 20px 10px;
+    margin: 10px 20px;
+
+    .country-list{
+        display: flex;
+        justify-content:space-evenly;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-left: auto;
+        margin-right: auto;
+    }    
+}
