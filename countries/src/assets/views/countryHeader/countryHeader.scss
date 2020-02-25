@@ -1,0 +1,15 @@
+.country-header-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: .5em;
+    width: 100%;
+
+    button{
+        margin-right: 1em;
+        &:last-child{
+            margin-right: 0px;
+        }
+    }
+}

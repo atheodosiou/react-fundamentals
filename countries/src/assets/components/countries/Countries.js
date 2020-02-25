@@ -1,22 +1,33 @@
 import React from 'react';
 import './Countries.scss';
 import countryCard from '../../views/countryCard/countryCard';
-
-import {_initCoutries,_loadMoreCountries} from './CountriesUtils';
+import CData from './Countries.json';
+import { _initCoutries, _loadMoreCountries } from './CountriesUtils';
+import countryHeader from '../../views/countryHeader/countryHeader';
 
 class Countries extends React.Component {
-    loadMoreCountries = ()=>{_loadMoreCountries(this)}
+    loadMoreCountries = () => { _loadMoreCountries(this) }
 
     constructor() {
         super();
         this.state = {
             allCountries: [],
             countryListError: false,
-            visibleCountries:[],
-            countriesVisibleOnLoad:6
+            visibleCountries: [],
+            countriesVisibleOnLoad: 15,
+            buttons:[
+                {
+                    text:"Sort A-Z",
+                    callback:console.log
+                },
+                {
+                    text:"Sort by Population",
+                    callback:console.log
+                }
+            ]
         };
 
-      _initCoutries(this);
+        _initCoutries(this);
     }
 
 
@@ -24,6 +35,13 @@ class Countries extends React.Component {
         console.log(this.state.allCountries);
         return (
             <section className="countries">
+                <h1>{CData.title}</h1>
+                {/* Country Header */}
+
+                {countryHeader({
+                   buttons:this.state.buttons
+                })}
+
                 <div className="country-list">
                     {this.state.visibleCountries.map((country, index) => {
                         return (<React.Fragment key={index}>
@@ -37,8 +55,8 @@ class Countries extends React.Component {
                         </React.Fragment>)
                     })}
                 </div>
-                {this.state.allCountries.length> this.state.visibleCountries.length &&(
-                    <button onClick={this.loadMoreCountries}>Load More</button>
+                {this.state.allCountries.length > this.state.visibleCountries.length && (
+                    <button onClick={this.loadMoreCountries}>{CData.loadMoreBtnText}</button>
                 )}
             </section>
         );
