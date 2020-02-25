@@ -4,7 +4,10 @@
     width: calc(100% - 40px);
     padding: 20px 10px;
     margin: 10px 20px;
-
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    ;
     .country-list{
         display: flex;
         justify-content:space-evenly;
@@ -12,5 +15,11 @@
         flex-wrap: wrap;
         margin-left: auto;
         margin-right: auto;
+       
     }    
+    // button{
+    //     display: flex;
+    //     align-self: flex-start;
+    //     justify-self: flex-start;
+    // }
 }

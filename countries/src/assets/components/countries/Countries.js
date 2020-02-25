@@ -1,33 +1,31 @@
 import React from 'react';
 import './Countries.scss';
 import countryCard from '../../views/countryCard/countryCard';
-import CONFIG from '../../Config';
+
+import {_initCoutries,_loadMoreCountries} from './CountriesUtils';
 
 class Countries extends React.Component {
+    loadMoreCountries = ()=>{_loadMoreCountries(this)}
+
     constructor() {
         super();
         this.state = {
             allCountries: [],
-            countryListError: false
+            countryListError: false,
+            visibleCountries:[],
+            countriesVisibleOnLoad:6
         };
 
-        this._initCoutries(this);
+      _initCoutries(this);
     }
 
-    _initCoutries(context) {
-        fetch(CONFIG.api).then(resp => resp.json()).then(data => {
-            context.setState((state) => ({ allCountries: data }));
-        }).catch(error => {
-            context.setState((state) => ({ countryListError: true }));
-        });
-    }
 
     render() {
         console.log(this.state.allCountries);
         return (
             <section className="countries">
                 <div className="country-list">
-                    {this.state.allCountries.map((country, index) => {
+                    {this.state.visibleCountries.map((country, index) => {
                         return (<React.Fragment key={index}>
                             {countryCard({
                                 imgSrc: country.flag,
@@ -37,8 +35,11 @@ class Countries extends React.Component {
                                 callback: null
                             })}
                         </React.Fragment>)
-                    })};
+                    })}
                 </div>
+                {this.state.allCountries.length> this.state.visibleCountries.length &&(
+                    <button onClick={this.loadMoreCountries}>Load More</button>
+                )}
             </section>
         );
 
